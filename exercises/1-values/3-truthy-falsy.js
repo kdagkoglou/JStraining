@@ -4,9 +4,9 @@
 
   'use strict';
 
-  // TODO: research truthy and falsy in JavaScript
-  // write a function that accepts two values (they won't be arrays or objects)
-  // return true when the values match exactly
+  // TODO: write a function that accepts two values (they won't be arrays or objects)
+  // and returns true when the values match exactly
+  // hint: research truthy and falsy in JavaScript!
   function exactMatch(value1, value2) {
 
     // YOUR CODE HERE!
@@ -19,7 +19,7 @@
       match = exactMatch(v1, v2),
       pass = (match === expected ? 'PASS' : 'FAIL');
 
-    console.log(v1, v2)
+    console.log(v1, v2);
     console.log('match: ' + match + ' - ' + pass + '\n');
   }
 
