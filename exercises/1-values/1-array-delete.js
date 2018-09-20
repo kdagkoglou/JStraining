@@ -7,6 +7,8 @@
   // define an array
   var myArray = [0, 1, 2, 3, 4];
 
+  myArray.splice(2,1);
+
   console.log(myArray.length, myArray);
 
   // TODO: remove the item at index 2

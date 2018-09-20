@@ -9,7 +9,9 @@
   // return [1, 3, 1]
   // it must be a pure function which does not change the input array!
   function arrayDeleteValues(array, match) {
-
+    return array.filter(function(element){
+      return element !== match;
+    });
   }
 
   // define an array

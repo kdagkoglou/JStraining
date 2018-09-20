@@ -9,9 +9,9 @@
   // hint: research truthy and falsy in JavaScript!
   function exactMatch(value1, value2) {
 
-    // YOUR CODE HERE!
-
-  }
+      return value1 === value2;
+      
+   }
 
   // simple test logging
   function testMatch(v1, v2, expected) {
