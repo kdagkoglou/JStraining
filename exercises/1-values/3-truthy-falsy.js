@@ -9,9 +9,9 @@
   // hint: research truthy and falsy in JavaScript!
   function exactMatch(value1, value2) {
 
-      return value1 === value2;
-      
-   }
+    return (value1 === value2 || (isNaN(value1) && isNaN(value2)));
+
+  }
 
   // simple test logging
   function testMatch(v1, v2, expected) {

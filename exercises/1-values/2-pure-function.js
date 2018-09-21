@@ -12,6 +12,8 @@
     return array.filter(function(element){
       return element !== match;
     });
+
+    // return array.filter(element => element !== match);
   }
 
   // define an array
