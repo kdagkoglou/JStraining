@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM selection</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+
+.bodyactive {
+  display: none;
+}
+
+body.active .bodyactive {
+  display: block;
+}
+
+p.para {
+  color: #0c0;
+}
+
+li[data-value] {
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+  <article>
+
+    <p class="intro">Introdution with <a href="#">a link</a>.</p>
+
+    <p>another paragraph</p>
+
+    <ul id="list">
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+
+  </article>
+
+  <p class="bodyactive">This paragraph is shown when the &lt;body&gt; has a class of 'active'.</p>
+
+<script>
+(function() {
+
+// 1. Add the class `active` to the `<body>` (a new paragraph will appear).
+
+
+// 2. Apply a class of `para` to all `<p>` elements (they will go green).
+
+
+// 3. Change the text of the second paragraph.
+
+
+// 4. Change the link's `href` to `"https://www.google.com/"`.
+
+
+// 5. Add a `data-value` attribute to all list items. It's value must be set to the numeric position, i.e. `"1"` for the first item, `"2"` for the second etc. (they will go bold).
+
+
+// 6. Change the colour of all list items to red.
+
+})();
+</script>
+</body>
+</html>

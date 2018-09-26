@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM selection</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <article>
+
+    <p class="intro">Introdution with <a href="#">a link</a>.</p>
+
+    <p>another paragraph</p>
+
+    <ul id="list">
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+
+  </article>
+
+<script>
+(function() {
+
+// 1. Write a (reusable) function to remove all child nodes of an element. Use it to clear the `<ul>` list.
+
+
+// 2. Move the the first paragraph to the end of the article.
+
+
+// 3. Insert a new `<h2>New title</h2>` title before the list.
+
+
+// 4. Insert a new paragraph at the end of the document with the current date.
+
+
+/*
+  Tasks (optional and possibly better to wait until we've looked at events and recursion!)
+
+  Traverse the whole DOM tree and output the name of every element node using recursion.
+
+  Fork the todo list and make the 'done' buttons work. When clicked, a strike-through style will be toggled on the text.
+  https://jsfiddle.net/craigbuckler/od0r1u7p/
+
+  Create a modal pop-up dialog system which can have a custom message and an `OK` button to dismiss. The pop-up should appear when a user clicks the link at the top of the page. Note that we've not covered events yet, so a partial solution may only be achievable at this stage. Bonus points for creating two systems: one with a `<template>` and one adding nodes using a document fragment.
+*/
+
+})();
+</script>
+</body>
+</html>

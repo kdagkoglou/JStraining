@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM selection</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <article>
+
+    <p class="intro"><a href="#">a link</a></p>
+
+    <p>another paragraph</p>
+
+    <ul id="list">
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+
+  </article>
+
+<script>
+(function() {
+
+// EXAMPLE: find all article tags
+// open your DevTools console to view
+// Note there will be more than one way to achieve these
+// but no JavaScript functions or loops should be necessary!
+console.log( document.getElementsByTagName('article') );
+
+// 1. Get the element with the ID 'list'.
+console.log(  );
+
+// 2. Get the element with the class 'intro'.
+console.log(  );
+
+// 3. Find any paragraph without the class 'intro'.
+console.log(  );
+
+// 4. Count the number of child elements of the first element with the class 'intro'.
+console.log(  );
+
+// 5. Find the last paragraph.
+console.log(  );
+
+// 6. Find the last list item.
+console.log(  );
+
+// 7. Find the second list item.
+console.log(  );
+
+// 8. Find the parent element of the first paragraph tag
+console.log(  );
+
+})();
+</script>
+</body>
+</html>

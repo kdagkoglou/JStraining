@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM manipulation</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <article>
+
+    <p class="intro">Introdution with <a href="#">a link</a>.</p>
+
+    <p id="changeme" class="c1" data-myvalue="123">another paragraph</p>
+
+    <ul id="list">
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+
+  </article>
+
+<script>
+(function() {
+
+// console.log( document.getElementById('list') );
+// console.log( document.getElementsByClassName('intro') );
+// console.log( document.getElementsByTagName('p') );
+// console.log( document.querySelector('article ul li') );
+// console.log( document.querySelectorAll('article ul li') );
+
+// let ptags = document.getElementsByTagName('p');
+// let p = Array.from(ptags);
+// console.log(p.forEach(i => console.log(i)));
+
+// add nodes into DOM
+// document.body.appendChild(document.createElement('p'));
+// document.body.appendChild(document.createElement('p'));
+// document.body.appendChild(document.createElement('p'));
+
+// console.log(ptags);
+
+// let node = document.getElementsByTagName('ul')[0];
+//if (!node) return;
+
+// console.log( node.children );
+// console.log( node.firstElementChild );
+// console.log( node.lastElementChild );
+// console.log( node.previousElementSibling );
+// console.log( node.nextElementSibling );
+// console.log( node.parentElement );
+// console.log( node.closest('article') );
+
+// let p = document.getElementById('changeme');
+
+// console.log( p.textContent );
+// console.log( p.nodeType );
+// console.log( p.nodeName );
+// console.log( p.className );
+// p.classList.add('c2')
+// p.classList.toggle('c1');
+// p.classList.remove('c2');
+// console.log( 'class:', p.className );
+// console.log( p.getAttribute('data-myvalue') );
+// console.log( p.dataset.myvalue );
+
+// p.style.backgroundColor = '#eee';
+// console.log( 'bgcol:', p.style.backgroundColor );
+
+// console.log( p.firstChild.nodeValue );
+
+// console.log('--------');
+
+// p.textContent = 'Hello Kostas!';
+// p.className = 'c1 c2 c3';
+// p.setAttribute('class', 'c1 c2 c3');
+// p.classList.remove('c3');
+// console.log( p.className );
+// p.removeAttribute('class');
+// p.dataset.myvalue = 'abc';
+// console.log( p.dataset.myvalue );
+
+// console.log('--------');
+
+// let list = document.getElementById('list');
+// console.log( list.innerHTML );
+
+// list.innerHTML = '<li>my new list</li>';
+
+// console.log( list.outerHTML );
+
+
+})();
+
+(function() {
+
+// let newp = document.createElement('p');
+// newp.textContent = 'I am a new p tag!';
+
+// let article = document.getElementsByTagName('article')[0];
+// //console.log( article.insertBefore(newp, article.firstElementChild) );
+
+// let newp1 = article.appendChild(newp.cloneNode(true));
+// let newp2 = article.appendChild(newp.cloneNode(true));
+// let newp3 = article.appendChild(newp.cloneNode(true));
+
+// newp1.style.fontWeight = 'bold';
+
+// //article.removeChild(ptag);
+
+})();
+
+(function() {
+
+  let
+    article = document.getElementsByTagName('article')[0],
+    frag = document.createDocumentFragment(),
+    newp = document.createElement('p');
+
+  newp.textContent = 'I am a new p tag!';
+
+  for (let i = 1; i <= 5; i++) {
+    let p = newp.cloneNode(true);
+    p.textContent = p.textContent + ' (' + i + ')';
+    frag.appendChild( p );
+  }
+
+  article.appendChild(frag);
+
+})()
+</script>
+</body>
+</html>
