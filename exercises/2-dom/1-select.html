@@ -37,28 +37,29 @@ body {
 console.log( document.getElementsByTagName('article') );
 
 // 1. Get the element with the ID 'list'.
-console.log(  );
+console.log( document.getElementById('list') );
 
 // 2. Get the element with the class 'intro'.
-console.log(  );
+console.log( document.getElementsByClassName('intro') );
 
 // 3. Find any paragraph without the class 'intro'.
-console.log(  );
+console.log( document.querySelector('p:not(.intro)') );
 
 // 4. Count the number of child elements of the first element with the class 'intro'.
-console.log(  );
+console.log( document.getElementsByClassName('intro')[0].children.length );
 
 // 5. Find the last paragraph.
-console.log(  );
+//not very pretty, but always gets the last 'p'!
+console.log( document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1] );
 
 // 6. Find the last list item.
-console.log(  );
+console.log( document.getElementById('list').lastElementChild );
 
 // 7. Find the second list item.
-console.log(  );
+console.log( document.getElementById('list').children[1] );
 
 // 8. Find the parent element of the first paragraph tag
-console.log(  );
+console.log( document.getElementsByTagName('p')[0].parentNode );
 
 })();
 </script>
