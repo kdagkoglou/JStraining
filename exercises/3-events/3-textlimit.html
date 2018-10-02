@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM selection</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+
+textarea {
+  overflow: auto;
+}
+</style>
+</head>
+<body>
+
+    <div>
+      <textarea rows="6" cols="30" data-limit="100"></textarea>
+    </div>
+
+<script>
+(function() {
+
+  // Create a twitter-like limited text entry <textarea>.
+  // The number of characters should be limited to the data-limit number.
+  // The number of remaining characters should be shown.
+  // Bonus points for changing warning the user when they get to the last 20%!
+
+  // Ideally, create a reusable component which
+  // applies itself to any number of textareas with a data-limit
+  // and will automatically initialize on page load
+
+  // Note this has some gotchas so contact me if you get stuck!
+
+
+})();
+</script>
+</body>
+</html>

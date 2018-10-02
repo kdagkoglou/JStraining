@@ -32,13 +32,13 @@ body {
 
 // 1. Write a (reusable) function to remove all child nodes of an element. Use it to clear the `<ul>` list.
 function removeChildren(element) {
-  while (element.firstElementChild) {
-    element.removeChild(element.firstElementChild);
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
   };
 };
 
 var ul = document.getElementById('list');
-removeChildren(ul);
+if (ul) removeChildren(ul);
 
 // 2. Move the first paragraph to the end of the article.
 var p = document.getElementsByTagName('p')[0];
@@ -49,7 +49,12 @@ article.appendChild(p);
 let frag = document.createDocumentFragment();
 var h2 = frag.appendChild( document.createElement('h2') );
 h2.textContent = "New title";
+
+console.log(frag.firstChild);
+
 article.insertBefore(frag, ul);
+
+console.log(frag.firstChild);
 
 // 4. Insert a new paragraph at the end of the document with the current date.
 var pi = frag.appendChild( document.createElement('p') );

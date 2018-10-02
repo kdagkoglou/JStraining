@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM manipulation</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <article>
+
+    <p><strong>CLICK ME 1</strong></p>
+    <p><strong>CLICK ME 2</strong></p>
+    <p><strong>CLICK ME 3</strong></p>
+    <p><strong>CLICK ME 4</strong></p>
+    <p><strong>CLICK ME 5</strong></p>
+
+  </article>
+
+<script>
+(function() {
+
+// http://localhost:8888/code/events.html
+
+function handler1(e) {
+  console.log('article clicked');
+  console.log(e.target);
+  console.log(e.target.textContent);
+}
+
+document.querySelector('article').addEventListener('click', handler1, false);
+
+})()
+</script>
+</body>
+</html>

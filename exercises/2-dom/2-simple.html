@@ -31,7 +31,7 @@ li[data-value] {
 
   <article>
 
-    <p class="intro">Introdution with <a href="#">a link</a>.</p>
+    <p class="intro"><strong>Introdution</strong> with <a href="#">a link</a>.</p>
 
     <p>another paragraph</p>
 
@@ -58,18 +58,27 @@ for (i = 0; i < p.length; i++) {
 p[i].classList.add("para");
 };
 
+for (let i of p) { console.log(i); }
+
 
 // 3. Change the text of the second paragraph.
 p[1].textContent = "New Text Here!";
+
+// alternatively: p[1].firstChild.nodeValue = ...
 
 // 4. Change the link's `href` to `"https://www.google.com/"`.
 var a = p[0].firstElementChild;
 a.href = 'https://google.com/';
 
+// var a = document.getElementsByClassName('a');
+// var a1 = a.length && a[0];
+// if (a1) a.href = 'https://google.com/';
+
+
 // 5. Add a `data-value` attribute to all list items. It's value must be set to the numeric position, i.e. `"1"` for the first item, `"2"` for the second etc. (they will go bold).
-var listItems = document.getElementById('list').children;
-for (i = 0; i < listItems.length; i++) {
-listItems[i].setAttribute('data-value', [i+1]);
+var listItems = document.getElementById('list');
+for (i = 0; listItems && listItems.children && i < listItems.children.length; i++) {
+  listItems[i].setAttribute('data-value', [i+1]);
 };
 
 
@@ -78,6 +87,11 @@ var listItems = document.getElementById('list').children;
 for (i = 0; i < listItems.length; i++) {
 listItems[i].style.color = "red";
 };
+
+// listItems.classList.add('red');
+// .red li {
+//   color: red;
+// }
 
 })();
 </script>
