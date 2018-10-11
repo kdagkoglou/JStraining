@@ -18,7 +18,7 @@ textarea {
 <body>
 
     <div>
-      <textarea rows="6" cols="30" data-limit="100"></textarea>
+      <textarea rows="6" cols="30" data-limit="10"></textarea>
     </div>
 
 <script>
@@ -35,6 +35,31 @@ textarea {
 
   // Note this has some gotchas so contact me if you get stuck!
 
+  function twitterText() { 
+
+    var twTextAreas = document.querySelectorAll('textarea[data-limit]');
+
+    for (var i = 0; i < twTextAreas.length; i++) {
+      var counter = twTextAreas[i].insertAdjacentElement('afterend', document.createElement('span') );
+      var number = twTextAreas[i].getAttribute('data-limit');
+      counter.textContent = number;
+      twTextAreas[i].addEventListener('keypress', charactersHandler);
+    }
+
+    function charactersHandler(event) {
+       counter.textContent = number - (this.value.length + 1);
+       if ( (this.value.length + 1) === number*0.8 ) {
+        alert("only 20% of characters to go...");
+       }
+       else if ( (this.value.length + 1) > number ) {
+        event.preventDefault();
+        alert("you reached the text limit!");
+        counter.textContent = 0;
+       } 
+    }
+  }
+
+  window.onload = twitterText();
 
 })();
 </script>

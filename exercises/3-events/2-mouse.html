@@ -27,6 +27,17 @@ body {
 
 <script>
 (function() {
+  var box = document.getElementById('hover');
+  box.addEventListener('mouseenter', enter);
+  box.addEventListener('mouseleave', exit);
+
+  function enter() {
+    this.textContent = "hovered";
+  }
+
+  function exit() {
+    this.textContent = "hover over me!";
+  }
 
   // As the mouse moves into the #hover box, change the text to 'hovered'.
   // Revert back to the original text as the mouse moves out
