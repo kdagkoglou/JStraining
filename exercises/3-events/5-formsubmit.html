@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM selection</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+  color: #444;
+  background-color: #fff;
+}
+
+.formgrid {
+	display: grid;
+  width: 30em;
+	grid-template-columns: 1fr 1em 3fr;
+	grid-gap: 3px .5rem;
+	align-items: center;
+	grid-auto-flow: dense;
+}
+
+button, input {
+	grid-column: 2/4;
+	clear: both;
+	float: right;
+	width: 70%;
+	font-family: sans-serif;
+	font-size: 1rem;
+	padding: .2rem .4rem;
+	margin: 0 0 3px;
+  border: 1px solid #999;
+	border-radius: 0;
+	outline: 0 none;
+	box-shadow: none;
+}
+
+label {
+	grid-column: 1/2;
+	float: left;
+	font-size: 1rem;
+	text-align: right;
+	padding: .25rem 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+}
+
+input:focus + label {
+  font-weight: 600;
+}
+
+button {
+	width: 10em;
+	font-weight: 600;
+	line-height: 1.6;
+	padding: .2rem 0 .4rem;
+	margin-top: 1rem;
+	color: #fff;
+	background-color: #666;
+	border: 0;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+  <form action="#" method="post">
+
+    <div class="formgrid">
+
+      <input type="text" id="name" name="name" autocomplete="name" required="" maxlength="50" />
+      <label for="name">name</label>
+
+      <input type="tel" id="telephone" name="telephone" autocomplete="tel" minlength="6" maxlength="20" />
+      <label for="telephone">telephone</label>
+
+      <input type="email" id="email" name="email" autocomplete="email" required="" minlength="6" maxlength="80" />
+      <label for="email">email</label>
+
+      <button type="submit" name="submit">send</button>
+
+    </div>
+
+  </form>
+
+<script>
+(function() {
+
+  // Only permit form submission if the name and EITHER (or both) the email and telephone fields are completed.
+  // Bonus points for showing error messages!
+
+
+})();
+</script>
+</body>
+</html>
