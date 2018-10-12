@@ -45,7 +45,16 @@ td {
   // when a table cell is clicked:
   // 1. Output its text value to the console, and
   // 2. Change its background to a random colour.
+var tds = document.getElementsByTagName('td');
 
+for (var i = 0; i < tds.length; i++) {
+  tds[i].addEventListener('click', cellHandler, false);
+}
+
+function cellHandler() {
+  console.log(this.textContent);
+  this.style.backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+}
 
 })();
 </script>
