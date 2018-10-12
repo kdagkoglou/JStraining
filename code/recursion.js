@@ -19,7 +19,8 @@ recursive functions
       ],
       { h: 8 }
     ],
-    i: 9
+    i: 9,
+    j: { k: 10, l: 11 }
   };
 
   recurse(obj);

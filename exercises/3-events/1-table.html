@@ -45,6 +45,8 @@ td {
   // when a table cell is clicked:
   // 1. Output its text value to the console, and
   // 2. Change its background to a random colour.
+
+  /*
 var tds = document.getElementsByTagName('td');
 
 for (var i = 0; i < tds.length; i++) {
@@ -55,6 +57,21 @@ function cellHandler() {
   console.log(this.textContent);
   this.style.backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 }
+*/
+
+// single event listener
+// reacts to any table on the page
+// we can update the DOM wihout changing the event handler
+// and it's less code and runs quicker
+document.body.addEventListener('click', function(e) {
+
+  let t = e.target;
+  if (!t || t.nodeName !== 'TD') return;
+
+  console.log(t.textContent);
+  t.style.backgroundColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+
+});
 
 })();
 </script>

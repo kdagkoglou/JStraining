@@ -75,7 +75,7 @@ button {
       <input type="text" id="name" name="name" autocomplete="name" required="" maxlength="50" />
       <label for="name">name</label>
 
-      <input type="tel" id="telephone" name="telephone" autocomplete="tel" minlength="6" maxlength="20" />
+      <input type="tel" id="telephone" name="telephone" autocomplete="tel" required="" minlength="6" maxlength="20" />
       <label for="telephone">telephone</label>
 
       <input type="email" id="email" name="email" autocomplete="email" required="" minlength="6" maxlength="80" />
@@ -91,7 +91,10 @@ button {
 (function() {
 
   // Only permit form submission if the name and EITHER (or both) the email and telephone fields are completed.
-  // Bonus points for showing error messages!
+	// Bonus points for showing error messages!
+
+	// You could look at the Form Validation API!
+	// https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
 
 
 })();

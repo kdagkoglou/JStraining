@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>custom event</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <article>
+
+    <p class="intro">Introdution with <a href="#">a link</a>.</p>
+
+    <p id="changeme" class="c1" data-myvalue="123">another paragraph</p>
+
+    <ul id="list">
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>item 3</li>
+    </ul>
+
+  </article>
+
+<script>
+(function() {
+
+  'use strict';
+
+  if (!CustomEvent || !window.addEventListener) return;
+
+  window.addEventListener('scroll', scroller, false);
+  window.addEventListener('resize', scroller, false);
+
+  var scTimer, scPos = 0;
+  function scroller() {
+
+    // timer fires the event no more than once every 300ms
+    scTimer = scTimer || setTimeout(function() {
+
+      // page scroll direction
+      var
+        wY = window.pageYOffset,
+        dir = Math.sign(wY - scPos);
+
+      scPos = wY;
+      scTimer = null;
+
+      // dispatch event on window
+      window.dispatchEvent(
+
+        new CustomEvent(
+          'scrollresize',           // custom event name
+          { detail: {               // further information for the handler
+            pos: scPos,             // current Y position
+            dir: dir                // direction: -1 for up, 1 for down, 0 for no scroll
+          }}
+        )
+
+      );
+
+    }, 300);
+
+  }
+
+  // react to event
+  window.addEventListener('scrollresize', function(e) {
+
+    console.log('at scroll position ', e.detail.pos, 'moving', e.detail.dir);
+
+  });
+
+})();
+</script>
+</body>
+</html>

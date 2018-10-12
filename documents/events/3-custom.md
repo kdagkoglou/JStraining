@@ -43,9 +43,7 @@ if (CustomEvent && window.addEventListener) {
           { detail: {               // further information for the handler
             pos: scPos,             // current Y position
             dir: dir                // direction: -1 for up, 1 for down, 0 for no scroll
-          }},
-          bubbles: false,           // event bubbles through DOM (not necessary here)
-          cancelable: false         // event can be cancelled (not necessary here)
+          }}
         )
 
       );
