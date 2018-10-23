@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>text limiter</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+
+.limit {
+  position: relative;
+  display: inline-block;
+  font-family: sans-serif;
+  padding: 1px 1px 1em 1px;
+  margin: 0.5em;
+  border: 1px solid #000;
+}
+
+.limit textarea {
+  font-family: sans-serif;
+  font-size: 0.9em;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 none;
+  overflow: auto;
+}
+
+.limit .counter {
+  position: absolute;
+  font-size: 0.9em;
+  right: 2px;
+  bottom: 0;
+  text-align: right;
+  color: #888;
+}
+
+.limit .counter.warn {
+  font-weight: bold;
+  color: #f00;
+}
+</style>
+</head>
+<body>
+
+  <div>
+    <textarea rows="6" cols="30" data-limit="100" data-warn="20"></textarea>
+  </div>
+
+  <div>
+    <textarea rows="6" cols="30" data-limit="80"></textarea>
+  </div>
+
+<script>
+
+/*
+This object is initialised using `new TextareaLimit(textAreaNode);` where `textAreaNode` must be a `<textarea>` element with a `data-limit` attribute which sets the maximum number of characters. A small self-running function creates an object for each appropriate `textarea` once the page loads. Each object then configures and manages itself.
+
+TODO:
+Examine the code to understand what is happening.
+
+Complete the checkInput and updateCounter methods to:
+
+1. Update the counter (this.counter) as the text is changed.
+2. Prevent the user entering more than this.limit characters.
+3. Use the this.cfg.warnClass class on this.counter as this.warn characters are reached.
+
+Tips:
+Ensure cursors, tab, delete and other keys remain active.
+Avoid setting and unsetting CSS classes on DOM elements when it's not necessary.
+Consider using a timeout to update the counter after a delay.
+*/
+
+// class constructor
+function TextareaLimit(node) {
+
+  'use strict';
+
+  // configuration
+  this.cfg = {
+    defaultLimit: 100,
+    defaultWarnFactor: 0.2,
+    activeClass: 'limit',
+    counterClass: 'counter',
+    warnClass: 'warn'
+  };
+
+  // reject any non-textarea or already registered
+  this.active = node && node.nodeName && node.nodeName === 'TEXTAREA' && !node.parentElement.classList.contains(this.cfg.activeClass);
+  if (!this.active) return;
+
+  // register textarea
+  this.element = node;
+  this.parent = node.parentElement;
+
+  // set limits
+  this.limit = this.element.dataset.limit || this.cfg.defaultLimit;
+  this.warn = this.element.dataset.warn || Math.floor(this.limit * this.cfg.defaultWarnFactor);
+
+  // set class
+  this.parent.classList.add(this.cfg.activeClass);
+
+  // add counter
+  var count = document.createElement('span');
+  count.className = this.cfg.counterClass;
+  count.textContent = '';
+  this.counter = this.parent.appendChild(count);
+  this.updateCounter();
+
+  // events (note checkInput handler bind)
+  this.element.addEventListener('keydown', this.checkInput.bind(this), false);
+
+};
+
+
+// TextareaLimit method: check keypress
+TextareaLimit.prototype.checkInput = function(event) {
+
+  'use strict';
+
+};
+
+// TextareaLimit method: update the counter
+TextareaLimit.prototype.updateCounter = function() {
+
+  'use strict';
+
+  this.length = this.element.value.length;
+  var c = this.limit - this.length;
+
+  this.counter.textContent = c;
+
+};
+
+
+(function() {
+
+	'use strict';
+
+  var textarea = document.querySelectorAll('textarea[data-limit]');
+
+  for (var i = textarea.length - 1; i >= 0; i--) {
+    new TextareaLimit(textarea[i]);
+  }
+
+})();
+</script>
+</body>
+</html>
