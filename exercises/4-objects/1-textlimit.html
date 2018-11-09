@@ -72,6 +72,9 @@ Tips:
 Ensure cursors, tab, delete and other keys remain active.
 Avoid setting and unsetting CSS classes on DOM elements when it's not necessary.
 Consider using a timeout to update the counter after a delay.
+
+Complete solution:
+https://jsfiddle.net/craigbuckler/y91ja2zL/
 */
 
 // class constructor
@@ -122,10 +125,10 @@ TextareaLimit.prototype.checkInput = function(event) {
   'use strict';
 
   var x = event.charCode || event.keyCode;
-  
+
   if (this.element.value.length < this.limit) {
     this.updateCounter();
-  } 
+  }
   else if (this.element.value.length >= this.limit && x != 8 && x != 46 && x != 37 ) {
     event.preventDefault();
     this.counter.textContent = '0';
@@ -142,7 +145,14 @@ TextareaLimit.prototype.updateCounter = function() {
   var c = this.limit - this.length;
   this.counter.textContent = c;
 
-  this.counter.classList = (this.length >= this.limit - this.warn) ? 'counter warn' : 'counter';
+  //this.counter.classList = (this.length >= this.limit - this.warn) ? 'counter warn' : 'counter';
+
+  if (this.length >= this.limit - this.warn) {
+    this.counter.classList.add(this.cfg.warnClass);
+  }
+  else {
+    this.counter.classList.remove(this.cfg.warnClass);
+  }
 
 };
 

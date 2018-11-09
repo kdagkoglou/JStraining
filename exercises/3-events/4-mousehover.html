@@ -36,10 +36,22 @@ body {
   box.addEventListener('mouseleave', coordsHover);
 
   function coordsHover(e) {
+
     var x = e.clientX;
     var y = e.clientY;
-    var coords = 'X = ' + x + 'and Y = ' + y;
-    document.getElementById('coords').innerHTML = (e.type === 'mousemove' ? coords : '');
+
+    // var x = e.offsetX;
+    // var y = e.offsetY;
+
+    // var x = e.pageX;
+    // var y = e.pageY;
+
+    // var x = e.movementX;
+    // var y = e.movementY;
+
+    var coords = 'X = ' + x + ' and Y = ' + y;
+    //document.getElementById('coords').innerHTML = (e.type === 'mousemove' ? coords : '');
+    document.getElementById('coords').textContent = (e.type === 'mousemove' ? coords : '');
   }
 
 })();
