@@ -43,6 +43,29 @@ body {
   // starting from the body tag, write a recursive function to output the
   // node name and text content (if any) of all nodes in the document (use nodeValue rather than textContent)
 
+  var body = document.getElementsByTagName('body')[0];
+  recurseNodes(body);
+
+  // function recurseNodes(node) {
+  //   for (var i = 0; i < node.children.length; i++) {
+  //     var child = node.children[i];
+  //     var name = child.nodeName;
+  //     var text = child.textContent;
+  //     console.log('name is: ' + name + ' and text is: ' + text);
+  //     recurseNodes(child);
+  //   }
+  // }
+
+  function recurseNodes(node) {
+    for (var i = 0; i < node.childNodes.length; i++) {
+      var child = node.childNodes[i];
+      var name = child.nodeName;
+      var text = child.nodeValue;
+      console.log('name is: ' + name + ' and text is: ' + text);
+      recurseNodes(child);
+    }
+  }
+
 })();
 </script>
 </body>

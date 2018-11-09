@@ -121,6 +121,16 @@ TextareaLimit.prototype.checkInput = function(event) {
 
   'use strict';
 
+  var x = event.charCode || event.keyCode;
+  
+  if (this.element.value.length < this.limit) {
+    this.updateCounter();
+  } 
+  else if (this.element.value.length >= this.limit && x != 8 && x != 46 && x != 37 ) {
+    event.preventDefault();
+    this.counter.textContent = '0';
+  }
+
 };
 
 // TextareaLimit method: update the counter
@@ -130,8 +140,9 @@ TextareaLimit.prototype.updateCounter = function() {
 
   this.length = this.element.value.length;
   var c = this.limit - this.length;
-
   this.counter.textContent = c;
+
+  this.counter.classList = (this.length >= this.limit - this.warn) ? 'counter warn' : 'counter';
 
 };
 

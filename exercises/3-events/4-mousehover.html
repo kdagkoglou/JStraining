@@ -25,11 +25,22 @@ body {
     hover over me!
   </div>
 
+  <p id="coords"></p>
+
 <script>
 (function() {
 
   // As the mouse moves into the #hover box, output the X and Y co-ordinates
+  var box = document.getElementById('hover');
+  box.addEventListener('mousemove', coordsHover);
+  box.addEventListener('mouseleave', coordsHover);
 
+  function coordsHover(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    var coords = 'X = ' + x + 'and Y = ' + y;
+    document.getElementById('coords').innerHTML = (e.type === 'mousemove' ? coords : '');
+  }
 
 })();
 </script>
