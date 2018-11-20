@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>social sharing widget</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <h1>Social sharing widget</h1>
+
+  <p>Share this page on:</p>
+
+  <ul>
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u={URL}">Facebook</a></li>
+    <li><a href="https://twitter.com/intent/tweet/?text={TITLE}&amp;url={URL}">Twitter</a></li>
+    <li><a href="https://www.linkedin.com/shareArticle?mini=true&amp;title={TITLE}&amp;url={URL}">Share on LinkedIn</a></li>
+  </ul>
+
+<script>
+
+/*
+TODO:
+Most social networks allow you to share a page without using their widgets. (Many of these are hundreds of Kb, slow the page, and introduce security/privacy issues.)
+
+The links above would normally link you away from the current site. Create a system which intercepts a click on any social media link, then:
+
+1. Modifies the URL to add the page {TITLE} (the <title> or first <h1> could do) and current URL. (Note this would often be done server-side in the template, but we'll presume this is a single-page app.)
+2. Opens this URL in a centred 600 x 600 popup.
+
+Hints:
+
+* any number of social media links could be on the page - feel free to add IDs or classes as necessary.
+* does the screen have room for a 600 x 600 popup?
+* remember that, if a popup is successfully opened, the default click action must be prevented!
+*/
+
+</script>
+</body>
+</html>

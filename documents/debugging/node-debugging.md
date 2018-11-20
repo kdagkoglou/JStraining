@@ -14,7 +14,7 @@ The Node `--trace-warnings` switch shows additional information when warnings ar
 
 VS Code has an excellent debugger which stores configuration defaults in the project's `.vscode/launch.json` file. This can be edited by opening the Debug panel and clicking the cog icon.
 
-Multiple configurations can be set - example for running Guardian4 using different parameters:
+Multiple configurations can be set - example for running `Guardian4` using different parameters:
 
 ```json
 {
