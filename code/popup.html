@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>popup</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <article>
+
+    <button id="open">open popup</button>
+
+  </article>
+
+<script>
+(function() {
+
+  document.getElementById('open').addEventListener('click', writePopup, false);
+
+  function simplePopup(e) {
+
+    e.preventDefault();
+
+    let popup = window.open(
+      'events.html',
+      'popup',
+      'width=400,height=400,top=100,location=0,menubar=0,status=0,resizable=0'
+    );
+
+  }
+
+
+  function advancedPopup(e) {
+
+    e.preventDefault();
+
+    let
+      cfg = {
+        width: 600,     // ideal width
+        height: 600,    // ideal height
+        minmargin: 100  // minimum margin from screen edge
+      },
+
+      sw = screen.availWidth || 1024,
+      sh = screen.availHeight || 700,
+      pw = Math.min(cfg.width, (sw - cfg.minmargin * 2)),
+      ph = Math.min(cfg.height, (sh - cfg.minmargin * 2)),
+      px = Math.floor((sw - pw) / 2),
+      py = Math.floor((sh - ph) / 2),
+
+      popup = window.open('events.html', 'popup',
+        'width=' + pw +
+        ',height=' + ph +
+        ',left=' + px +
+        ',top=' + py +
+        ',location=0,menubar=0,toolbar=0,personalbar=0,status=0,scrollbars=1,resizable=1'
+      );
+
+    if (popup) {
+
+      // focus the popup
+      popup.focus();
+
+    }
+    else {
+      alert('could not open pop-up?');
+    }
+
+  }
+
+
+  function writePopup(e) {
+
+    e.preventDefault();
+
+    let popup = window.open(
+      null,
+      'popup',
+      'width=400,height=400,top=100,location=0,menubar=0,status=0,resizable=0'
+    );
+
+    if (popup) {
+      popup.document.open();
+      popup.document.write('<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>popup</title></head><body><p>Hello! I\'m a pop-up!</p><script>alert(\'JS runs!\');<\/script></body></html>');
+      popup.document.close();
+      popup.focus();
+    }
+
+  }
+
+
+})()
+</script>
+</body>
+</html>
