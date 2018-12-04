@@ -17,10 +17,10 @@ body {
 
   <p>Share this page on:</p>
 
-  <ul>
-    <li class="social"><a href="https://www.facebook.com/sharer/sharer.php?u={URL}">Facebook</a></li>
-    <li class="social"><a href="https://twitter.com/intent/tweet/?text={TITLE}&amp;url={URL}">Twitter</a></li>
-    <li class="social"><a href="https://www.linkedin.com/shareArticle?mini=true&amp;title={TITLE}&amp;url={URL}">Share on LinkedIn</a></li>
+  <ul class="social">
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u={URL}">Facebook</a></li>
+    <li><a href="https://twitter.com/intent/tweet/?text={TITLE}&amp;url={URL}">Twitter</a></li>
+    <li><a href="https://www.linkedin.com/shareArticle?mini=true&amp;title={TITLE}&amp;url={URL}">Share on LinkedIn</a></li>
   </ul>
 
 <script>
@@ -42,17 +42,22 @@ Hints:
 */
 
 (function() {
-  
-  var socialLinks = document.getElementsByClassName('social');
-  var thisUrl = window.location.href;
-  var thisTitle = document.title;
-  
-  [].forEach.call(socialLinks, function(li) {
-  	li.addEventListener('click', socialPopup, false);
-  });
+
+  var
+    socialLinks = document.getElementsByClassName('social'),
+    thisUrl = window.location.href,
+    thisTitle = document.title;
+
+  // [].forEach.call(socialLinks, function(li) {
+  // 	li.addEventListener('click', socialPopup, false);
+  // });
+
+  document.body.addEventListener('click', socialPopup, false);
 
   function socialPopup(e) {
-    e.preventDefault();
+
+    // is this a social link?
+    if (!e.target.closest('.social')) return;
 
     let
       cfg = {
@@ -66,8 +71,8 @@ Hints:
       ph = Math.min(cfg.height, (sh - cfg.minmargin * 2)),
       px = Math.floor((sw - pw) / 2),
       py = Math.floor((sh - ph) / 2),
-      popup = window.open( 
-      	e.target.getAttribute('href').replace('{URL}', thisUrl).replace('{TITLE}', thisTitle), 
+      popup = window.open(
+      	e.target.getAttribute('href').replace('{URL}', thisUrl).replace('{TITLE}', thisTitle),
       	'popup',
         'width=' + pw +
         ',height=' + ph +
@@ -76,10 +81,11 @@ Hints:
         ',location=0,menubar=0,toolbar=0,personalbar=0,status=0,scrollbars=1,resizable=1'
       );
     if (popup) {
+      e.preventDefault();
       popup.focus();
     }
     else {
-      alert('could not open pop-up?');
+      // alert('could not open pop-up?');
     }
   }
 })()
