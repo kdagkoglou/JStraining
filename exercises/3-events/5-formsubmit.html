@@ -68,7 +68,7 @@ button {
 </head>
 <body>
 
-  <form action="#" method="post">
+  <form id="form" action="#" method="post">
 
     <div class="formgrid">
 
@@ -96,6 +96,25 @@ button {
 	// You could look at the Form Validation API!
 	// https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
 
+	var form = document.getElementById('form');
+    var name = document.getElementById("name");
+    var tel = document.getElementById("telephone");
+	var email = document.getElementById("email");
+	tel.removeAttribute("required"); 
+	email.removeAttribute("required");
+
+	var submitFunction = function(e) {
+    	
+    	if ( !tel.value && !email.value) {
+    		e.preventDefault();
+    		alert("need at least a tel. number or an email");
+    	} else  {
+    		// form.submit();
+        	alert("submit");
+        }
+    };
+
+	form.addEventListener('submit', submitFunction);
 
 })();
 </script>

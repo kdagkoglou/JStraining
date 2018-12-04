@@ -18,9 +18,9 @@ body {
   <p>Share this page on:</p>
 
   <ul>
-    <li><a href="https://www.facebook.com/sharer/sharer.php?u={URL}">Facebook</a></li>
-    <li><a href="https://twitter.com/intent/tweet/?text={TITLE}&amp;url={URL}">Twitter</a></li>
-    <li><a href="https://www.linkedin.com/shareArticle?mini=true&amp;title={TITLE}&amp;url={URL}">Share on LinkedIn</a></li>
+    <li class="social"><a href="https://www.facebook.com/sharer/sharer.php?u={URL}">Facebook</a></li>
+    <li class="social"><a href="https://twitter.com/intent/tweet/?text={TITLE}&amp;url={URL}">Twitter</a></li>
+    <li class="social"><a href="https://www.linkedin.com/shareArticle?mini=true&amp;title={TITLE}&amp;url={URL}">Share on LinkedIn</a></li>
   </ul>
 
 <script>
@@ -40,6 +40,49 @@ Hints:
 * does the screen have room for a 600 x 600 popup?
 * remember that, if a popup is successfully opened, the default click action must be prevented!
 */
+
+(function() {
+  
+  var socialLinks = document.getElementsByClassName('social');
+  var thisUrl = window.location.href;
+  var thisTitle = document.title;
+  
+  [].forEach.call(socialLinks, function(li) {
+  	li.addEventListener('click', socialPopup, false);
+  });
+
+  function socialPopup(e) {
+    e.preventDefault();
+
+    let
+      cfg = {
+        width: 600,     // ideal width
+        height: 600,    // ideal height
+        minmargin: 100  // minimum margin from screen edge
+      },
+      sw = screen.availWidth || 1024,
+      sh = screen.availHeight || 700,
+      pw = Math.min(cfg.width, (sw - cfg.minmargin * 2)),
+      ph = Math.min(cfg.height, (sh - cfg.minmargin * 2)),
+      px = Math.floor((sw - pw) / 2),
+      py = Math.floor((sh - ph) / 2),
+      popup = window.open( 
+      	e.target.getAttribute('href').replace('{URL}', thisUrl).replace('{TITLE}', thisTitle), 
+      	'popup',
+        'width=' + pw +
+        ',height=' + ph +
+        ',left=' + px +
+        ',top=' + py +
+        ',location=0,menubar=0,toolbar=0,personalbar=0,status=0,scrollbars=1,resizable=1'
+      );
+    if (popup) {
+      popup.focus();
+    }
+    else {
+      alert('could not open pop-up?');
+    }
+  }
+})()
 
 </script>
 </body>
