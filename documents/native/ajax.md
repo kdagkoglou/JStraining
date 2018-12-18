@@ -11,6 +11,21 @@ For this reason, "Ajax" is commonly used as a generic term for any client-side p
 Ajax is a technique rather than a technology and there are various options:
 
 
+## Useful public APIs
+
+List can be seen at <https://github.com/toddmotto/public-apis>
+
+Many are open and accept a request from anywhere because the following HTTP header is set:
+
+```text
+Access-Control-Allow-Origin: *
+```
+
+Some may request authorisation using a secret key or OAuth.
+
+Example joke generator: <https://official-joke-api.herokuapp.com/random_joke>
+
+
 ## `<script>` injection
 
 A `<script>` tag is dynamically added to the DOM. This calls a web service which returns JavaScript which can be generated and contain data.
@@ -39,7 +54,7 @@ myHandler({ name: 'returned data', value: 42, x: 1, y: 2, etc: 0 });
 The pros:
 
 * simple
-* works cross-domain
+* works cross-domain (CORS is unnecessary)
 * no need to parse the returned object
 
 The cons:
@@ -101,7 +116,7 @@ ajax('https://domain.com/myservice/?a=1&b=2&c=3', function (err, data) {
 });
 ```
 
-Most Ajax libraries also handle timeouts, POST data, progress bars, etc.
+Most Ajax libraries also handle errors, timeouts, non-JSON responses, POST data, file uploads, progress bars, etc.
 
 The pros:
 
@@ -194,6 +209,7 @@ function ajaxIntercept(form, callback) {
       catch(e) {} // not JSON
     }
 
+    form.inProgress = false;
     callback(err, data);
 
   };
@@ -235,4 +251,6 @@ The pros:
 The cons:
 
 * more limited browser support
+* primarily for JSON data
+* errors can be difficult to parse
 * no direct support for timeouts and request cancellation.
