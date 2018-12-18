@@ -4,16 +4,87 @@
 <meta charset="UTF-8">
 <title>timers</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <style>
-body {
-  font-family: sans-serif;
-  font-size: 100%;
-}
+	body {
+    font-family: sans-serif;
+  	font-size: 100%;
+	}
+	#digitalClock {
+		left: 10%;
+	  font-size: 30px;
+	  color: #4d4d4d;
+	  letter-spacing: 5px;
+	  font-family: Orbitron;
+	  max-width:400px;
+	  text-align: center;
+	}
+  #analogClock {
+    stroke: #4d4d4d;
+    fill: #f2f2f2;
+  }
+  #face, #ticks { 
+  	stroke-width: 2px;
+  }
+  #hour {
+  	stroke-width: 3px;
+  	stroke: #606060;
+  }
+  #minute {
+  	stroke-width: 2px;
+  	stroke: #606060;
+  } 
+  #second {
+  	stroke-width: 1px;
+  	stroke: #f55;
+  }
+  #numbers {
+    font-family: Orbitron; 
+    font-size: 8px; 
+    font-weight: bold;
+    text-anchor: middle; 
+    stroke: none; 
+    fill: #4d4d4d;
+  }
 </style>
 </head>
 <body>
 
   <h1>Timer exercises</h1>
+  <br>
+	<svg id="analogClock" viewBox="0 0 100 100" width="400" height="400">
+
+    <circle id="face" cx="50" cy="50" r="45"/> <!-- the clock face -->
+
+    <g id="ticks">
+      <line x1='50' y1='5' x2='50' y2='10'/>
+      <line x1='72.50' y1='11.03' x2='70' y2='15.36'/>
+      <line x1='88.97' y1='27.50' x2='84.64' y2='30'/>
+      <line x1='95' y1='50' x2='90' y2='50'/>
+      <line x1='88.97' y1='72.50' x2='84.64' y2='70'/>
+      <line x1='72.50' y1='88.97' x2='70' y2='84.64'/>
+      <line x1='50' y1='95' x2='50' y2='90'/>
+      <line x1='27.50' y1='88.97' x2='30' y2='84.64'/>
+      <line x1='11.03' y1='72.50' x2='15.36' y2='70'/>
+      <line x1='5' y1='50' x2='10' y2='50'/>
+      <line x1='11.03' y1='27.50' x2='15.36' y2='30'/>
+      <line x1='27.50' y1='11.03' x2='30' y2='15.36'/>
+    </g>
+
+    <g id="numbers">
+      <text x="50" y="18">12</text>
+      <text x="85" y="53">3</text>
+      <text x="50" y="88">6</text>
+      <text x="15" y="53">9</text>
+    </g>
+
+    <g id="hands"> 
+      <line id="hour" x1="50" y1="52" x2="50" y2="27"/>
+      <line id="minute" x1="50" y1="52" x2="50" y2="20"/>
+      <line id="second" x1="50" y1="52" x2="50" y2="15"/>
+    </g>
+  </svg>
+	<div id="digitalClock"></div>
 
 <script>
 
@@ -23,6 +94,55 @@ Create a real-time clock which shows the current hour, minute and second.
 
 Hint: you'll need to use setTimeout or setInterval but do not rely on their accuracy!
 */
+
+(function() {
+
+	function digitalTime(){
+	    
+	    var thisDate = new Date(),
+			    h = needsZero( thisDate.getHours() ),
+		    	m = needsZero( thisDate.getMinutes() ),
+		    	s = needsZero( thisDate.getSeconds() );
+	 
+	    var time = h + ":" + m + ":" + s;
+	    document.getElementById("digitalClock").textContent = time;
+	    
+	    setTimeout(digitalTime, 1000);
+	}
+
+	function needsZero(val, length, chr) {
+		val = String(val || '');
+		length = length || 2;
+		chr = chr || '0';
+	  while (val.length < length) val = chr + val;
+	  return val;
+	}
+
+	function analogTime() {
+
+	  var thisDate = new Date(),
+			  s = thisDate.getSeconds(),
+			  m = thisDate.getMinutes(),
+			  h = (thisDate.getHours() % 12) + m / 60,
+			  secangle = s * 6,
+			  minangle = m * 6,
+			  hourangle = h * 30,
+
+	  		sechand = document.getElementById("second"),
+	   		minhand = document.getElementById("minute"),
+	   		hourhand = document.getElementById("hour");
+	   		
+	  sechand.setAttribute("transform", "rotate(" + secangle + ",50,50)");
+	  minhand.setAttribute("transform", "rotate(" + minangle + ",50,50)");
+	  hourhand.setAttribute("transform", "rotate(" + hourangle + ",50,50)");
+	  setTimeout(analogTime, 1000);
+	}
+
+	analogTime();
+	digitalTime();
+
+})()
+
 </script>
 </body>
 </html>
