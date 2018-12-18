@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>date handling</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+div {
+	width: 500px;
+}
+</style>
+</head>
+<body>
+
+  <h1>Date exercises</h1>
+
+  <div>
+  	<p>Exercise 1. <span id="ex1"></span></p>
+  	<hr>
+  	<p>Exercise 2. <span id="ex2"></span></p>
+  	<hr>
+  	<p>Exercise 3. <span id="ex3"></span></p>
+  	<hr>
+  	<p>Exercise 4. <span id="ex4"></span></p>
+  	<hr>
+  	<p>Exercise 5. <span id="ex5"></span></p>
+	</div>
+<script>
+
+/*
+TODO:
+Create functions to:
+
+1. Pretty print function. Given a date, return a readable string using the format "DD-MM-YYYY, HH:MM".
+2. Day add function. Given a date and a positive or negative number, add that number to the day, i.e. -1 would return yesterday, 1 would return tomorrow.
+3. Month start function. Given a date, return a new date matching midnight on the first day of month, e.g. 25-06-2018 would return 01-06-2018.
+4. Month end function. Write a similar function which returns the last day of the month. (Hint: finding the first day of a month is simpler - could that be used to find the last?)
+5. Start of week function. Given a date, return a new date matching midnight on the first Monday of that week, e.g. 28-01-18 would return 22-01-18.
+
+Bonus point: dates are objects so they are passed to functions by reference (a pointer to the value rather than a copy of the value is passed). Try and make your functions **immutable**, i.e. the function result does not change the value of the input parameter.
+*/
+
+var now = new Date();
+
+// 1.
+function getPrettyDate(date) {
+	var
+		thisDate = new Date(date),
+		year = thisDate.getFullYear(),
+    month = needsZero( (thisDate.getMonth() + 1) ),
+    day = needsZero( thisDate.getDate() ),
+    hour = needsZero( thisDate.getHours() ),
+    minute = needsZero( thisDate.getMinutes() );
+
+	return day + "/" + month + "/" + year + ", " + hour + ':' + minute;
+};
+
+function needsZero(val, length, chr) {
+	val = String(val || '');
+	length = length || 2;
+	chr = chr || '0';
+  while (val.length < length) val = chr + val;
+  return val;
+}
+document.getElementById('ex1').textContent = getPrettyDate( now );
+
+// 2.
+function dayOfWeek(date, days) {
+	var
+		thisDate = new Date(date);
+    //weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+		thisDate.setDate(thisDate.getDate() + days);
+		return thisDate;
+  	//return weekday[thisDate.getDay()];
+}
+document.getElementById("ex2").textContent = getPrettyDate( dayOfWeek( now, -100 ) );
+
+// 3.
+function firstOfMonth(date) {
+	var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+
+	return getPrettyDate(firstDay);
+}
+document.getElementById("ex3").textContent = firstOfMonth( now );
+
+// 4.
+function lastOfMonth(date) {
+	var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+	return getPrettyDate(lastDay);
+}
+document.getElementById("ex4").textContent = lastOfMonth( now );
+
+// 5.
+function startOfWeek(date) {
+	var thisDate = new Date(date);
+
+	thisDate.setUTCDate(thisDate.getUTCDate() - thisDate.getUTCDay() + (thisDate.getUTCDay() === 0 ? -6 : 1));
+
+	thisDate.setUTCMilliseconds(0);
+	thisDate.setUTCSeconds(0);
+	thisDate.setUTCMinutes(0);
+	thisDate.setUTCHours(0);
+
+	return getPrettyDate(thisDate);
+}
+document.getElementById("ex5").textContent = startOfWeek( new Date(2018,11,15,12,11,19) );
+
+</script>
+</body>
+</html>

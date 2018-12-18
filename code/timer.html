@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>timer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+
+#box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}
+</style>
+</head>
+<body>
+
+<div id="box"></div>
+
+<script>
+(function() {
+
+// move an element from 0px to 100px in one second
+let
+  moveTime = 1000,
+  startTime = null,
+  box = document.getElementById('box');
+
+requestAnimationFrame(move);
+
+function move(timestamp) {
+
+  startTime = startTime || timestamp;
+
+  let
+    progress = Math.min(timestamp - startTime, moveTime),
+    t = progress / moveTime;
+
+  // t is a timing value between 0 (start of animation) and 1 (end)
+  // it's possible to create easing functions, e.g.
+  t = (t < 0.5 ? 8*t*t*t*t : 1-8*(--t)*t*t*t);
+
+  box.style.left = t * 100 + 'px';
+  if (t < 1) requestAnimationFrame(move);
+}
+
+})()
+</script>
+</body>
+</html>
