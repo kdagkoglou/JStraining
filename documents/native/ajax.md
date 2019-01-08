@@ -8,18 +8,20 @@ AJAX: "Asynchronous JavaScript and XML" but...
 
 For this reason, "Ajax" is commonly used as a generic term for any client-side process which fetches data from a server and updates the DOM dynamically without a full-page refresh.
 
-Ajax is a technique rather than a technology and there are various options:
+Ajax is a technique rather than a technology and there the three primary options are described below.
 
 
 ## Useful public APIs
 
 List can be seen at <https://github.com/toddmotto/public-apis>
 
-Many are open and accept a request from anywhere because the following HTTP header is set:
+Many are open and accept a request from anywhere because the following Cross-Origin Resource Sharing (CORS) HTTP header is set:
 
 ```text
 Access-Control-Allow-Origin: *
 ```
+
+*(This is returned on an OPTION request made by the browser prior to the real request.)*
 
 Some may request authorisation using a secret key or OAuth.
 
@@ -61,11 +63,12 @@ The cons:
 
 * security - any page can call the service
 * an error in the callback could stop JavaScript running
+* only practical for HTTP GET requests. POST, PUT, DELETE etc. would probably be impractical.
 
 
 ## XMLHttpRequest
 
-The [`XMLHttpRequest (XHR)`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) object was originally developed by Microsoft for IE5.0 in order to implement a web system for Outlook. It took five years for the API to achieve widespread use after the term AJAX was conceived.
+The [`XMLHttpRequest (XHR)`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) object was originally developed by Microsoft for IE5.0 in order to implement a web system for Outlook. It took five years for the API to achieve widespread use after the term [Ajax was conceived](https://adaptivepath.org/ideas/ajax-new-approach-web-applications/).
 
 Basic usage for just GET calls:
 
@@ -120,7 +123,7 @@ Most Ajax libraries also handle errors, timeouts, non-JSON responses, POST data,
 
 The pros:
 
-* more robust
+* more robust and supports all HTTP types (POST, PUT etc.)
 * better features including progress meters and file uploading
 * better security - can only make calls to the same server unless [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is set
 
@@ -132,9 +135,9 @@ The cons:
 
 ## Progressive Enhancement using Ajax
 
-Assure's `lib.ajax()` (see `src/js/lib.js`) method implements Progressive Enhancement techniques which can be used to intercept a form submission and convert a server-rendered page to an Ajax-powered page when the browser can download and run JavaScript.
+Assure's `lib.ajax()` (see `src/js/lib.js`) method implements Progressive Enhancement techniques which intercept a form submission and convert a server-rendered page to an Ajax-powered page (presuming the browser can download and run the necessary JavaScript).
 
-The [`FormData` API](https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData) is specifically designed for this purpose since it can read all the values set by a form and pass them to an Ajax request.
+The [`FormData` API](https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData) is specifically designed for this purpose since it can read all the values set by a form and pass them in an Ajax request.
 
 Example sign-up form:
 
@@ -151,14 +154,18 @@ Example sign-up form:
 
 The form will POST data to the `/signup` endpoint which will return another HTML page containing a success or failure message.
 
-Progressive enhancement can be used to avoid downloading a new page:
+Progressive enhancement can avoid this new page refresh. The server can detect that `X-Requested-With` is set to `XMLHttpRequest` in the HTTP request header and return a JSON response rather than a full HTML page:
 
 ```js
+// client-side JS
+
+// get the signup form node
 var signup = document.getElementById('signup');
 
 // check all APIs are supported
 if (signup && signup.nodeName === 'FORM' && addEventListener && XMLHttpRequest && FormData) {
 
+  // intercept form submit event
   signup.addEventListener('submit', function(e) {
 
     // stop submit
@@ -219,6 +226,8 @@ function ajaxIntercept(form, callback) {
 }
 ```
 
+The browser will fall back to the standard form submit if there is a problem, e.g. the JavaScript fails to load, Ajax is not supported, another script terminates JS processing, etc.
+
 
 ## Fetch API
 
@@ -254,3 +263,5 @@ The cons:
 * primarily for JSON data
 * errors can be difficult to parse
 * no direct support for timeouts and request cancellation.
+
+Recommendation: it is fine to use `Fetch()` for internal or demonstration code but `XMLHttpRequest` is currently a better for more robust client-facing systems. That situation will change over time.
