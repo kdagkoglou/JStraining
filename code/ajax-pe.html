@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ajax</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <form id="signup" method="POST" action="/signup">
+
+    <input type="email" name="email" required="" minlength="6" maxlength="50" placeholder="email" />
+    <input type="password" name="password" required="" minlength="5" maxlength="50" placeholder="password" />
+
+    <button type="submit">sign up</button>
+
+  </form>
+
+<script>
+(function() {
+
+  // get the signup form node
+  var signup = document.getElementById('signup');
+
+  // check all APIs are supported
+  if (signup && signup.nodeName === 'FORM' && addEventListener && XMLHttpRequest && FormData) {
+
+    // intercept form submit event
+    signup.addEventListener('submit', function(e) {
+
+      // stop submit
+      e.preventDefault();
+
+      // make ajax call
+      ajaxIntercept(signup, function(err, data) {
+
+        if (!err && data.success) {
+          alert('sign-up successful!');
+        }
+        else {
+          alert('sign-up failed\n' + (data && data.reason ? data.reason : ''));
+        }
+
+      });
+
+    });
+
+  }
+
+
+  // send form data via Ajax request
+  function ajaxIntercept(form, callback) {
+
+    // prevent submissions in progress
+    if (form.inProgress) return;
+    form.inProgress = true;
+
+    var
+      req = new XMLHttpRequest(),
+      data = new FormData(form);
+
+    req.open(form.method, form.action);
+    req.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // useful header
+
+    // request state change
+    req.onreadystatechange = function() {
+
+      if (req.readyState !== 4) return;
+
+      var
+        err = req.status === 200 ? false : req.status,
+        data = req.response;
+
+      if (!err) {
+        try { data = JSON.parse(data); }
+        catch(e) {} // not JSON
+      }
+
+      form.inProgress = false;
+      callback(err, data);
+
+    };
+
+    // send form data
+    req.send(data);
+
+  }
+
+})()
+</script>
+</body>
+</html>

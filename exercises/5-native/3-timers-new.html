@@ -97,17 +97,29 @@ Hint: you'll need to use setTimeout or setInterval but do not rely on their accu
 
 (function() {
 
-	function digitalTime(){
+	var
+		digital = document.getElementById('digitalClock'),
+		sechand = document.getElementById('second'),
+	  minhand = document.getElementById('minute'),
+	  hourhand = document.getElementById('hour');
 
-	    var thisDate = new Date(),
-			    h = needsZero( thisDate.getHours() ),
-		    	m = needsZero( thisDate.getMinutes() ),
-		    	s = needsZero( thisDate.getSeconds() );
+	setInterval(function() {
 
-	    var time = h + ":" + m + ":" + s;
-	    document.getElementById("digitalClock").textContent = time;
+		var
+			thisDate = new Date(),
+			h = thisDate.getHours(),
+			m = thisDate.getMinutes(),
+			s = thisDate.getSeconds();
 
-	    setTimeout(digitalTime, 1000);
+		digitalTime(h, m, s);
+		analogTime(h, m, s);
+
+	}, 1000);
+
+	function digitalTime(h, m, s) {
+
+	  digital.textContent = needsZero(h) + ':' + needsZero(m) + ':' + needsZero(s);
+
 	}
 
 	function needsZero(val, length, chr) {
@@ -118,28 +130,18 @@ Hint: you'll need to use setTimeout or setInterval but do not rely on their accu
 	  return val;
 	}
 
-	function analogTime() {
+	function analogTime(h, m, s) {
 
-	  var thisDate = new Date(),
-			  s = thisDate.getSeconds(),
-			  m = thisDate.getMinutes(),
-			  h = (thisDate.getHours() % 12) + m / 60,
-			  secangle = s * 6,
-			  minangle = m * 6,
-			  hourangle = h * 30,
+	  var
+			secangle = s * 6,
+			minangle = m * 6,
+			hourangle = ((h % 12) + m / 60) * 30;
 
-	  		sechand = document.getElementById("second"),
-	   		minhand = document.getElementById("minute"),
-	   		hourhand = document.getElementById("hour");
+	  sechand.setAttribute('transform', 'rotate(' + secangle + ',50,50)');
+	  minhand.setAttribute('transform', 'rotate(' + minangle + ',50,50)');
+		hourhand.setAttribute('transform', 'rotate(' + hourangle + ',50,50)');
 
-	  sechand.setAttribute("transform", "rotate(" + secangle + ",50,50)");
-	  minhand.setAttribute("transform", "rotate(" + minangle + ",50,50)");
-	  hourhand.setAttribute("transform", "rotate(" + hourangle + ",50,50)");
-	  setTimeout(analogTime, 1000);
 	}
-
-	analogTime();
-	digitalTime();
 
 })()
 

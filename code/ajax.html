@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ajax</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <p id="question"></p>
+  <p id="answer"></p>
+
+<script>
+(function() {
+
+  // basic GET call
+  function ajaxCall(url, callback) {
+
+    var req = new XMLHttpRequest();
+    req.open('GET', url);
+    // req.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // useful header
+
+    // request state change
+    req.onreadystatechange = function() {
+
+      if (req.readyState !== 4) return;
+
+      callback(
+        (req.status === 200 ? false : req.status),  // error code
+        (req.response || null)                      // data string
+      )
+
+    };
+
+    // start request
+    req.send();
+
+  }
+
+
+  ajaxCall('https://official-joke-api.herokuapp.com/random_joke', function (err, data) {
+
+    if (err) {
+      console.log('error', err);
+    }
+    else {
+
+      try {
+        var result = JSON.parse(data);
+
+        document.getElementById('question').textContent = result.setup;
+        document.getElementById('answer').textContent = result.punchline;
+
+      }
+      catch(e) {
+        console.log(e);
+      }
+
+    }
+
+  });
+
+})()
+</script>
+</body>
+</html>

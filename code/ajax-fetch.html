@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ajax Fetch</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+  <p id="question"></p>
+  <p id="answer"></p>
+
+<script>
+(function() {
+
+  var
+    url = 'https://official-joke-api.herokuapp.com/random_joke';
+
+  fetch(url, {
+    method: 'GET'
+  })
+    .then( res => res.json() )
+    .then( result => {
+      console.log(result);
+      document.getElementById('question').textContent = result.setup;
+      document.getElementById('answer').textContent = result.punchline;
+    })
+    .catch( error => console.error('Error:', error) );
+
+})()
+</script>
+</body>
+</html>
