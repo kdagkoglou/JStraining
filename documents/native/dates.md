@@ -36,6 +36,7 @@ Note that `Date.parse` can be inconsistent across older browsers.
 
 
 ## Date properties
+
 Main GET properties:
 
 * `.getFullYear()` - e.g. 2018
@@ -78,6 +79,7 @@ console.log(d); // midnight of today
 
 
 ## Tips
+
 On the server (such as Node.js), it's often best to use the UTC functions everywhere (UTC aligns with GMT outside of daylight saving time). UTC remains constant and never changes according to seasons.
 
 On the client, you can use the user's local time (which may not be UTC) although there's no guarantee it'll be set correctly. Never depend on it!
