@@ -5,15 +5,87 @@
 <title>Ajax quiz</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
-body {
-  font-family: sans-serif;
-  font-size: 100%;
-}
+	body {
+	  	font-family: sans-serif;
+	 	font-size: 100%;
+	}
+	#startQuiz {
+		display: block;
+		cursor: pointer;
+		max-width: 200px;
+		margin: 17.5% auto;
+		background-color: #eee;
+		border-radius: 5px;
+		padding: 10px;
+	}
+	#quiz-box {
+		display: none;
+    	max-width: 600px;
+    	margin: 0 auto;
+    	text-align: center;
+    	background-color: #eee;
+    	border-radius: 5px;
+    	padding: 10px;
+  	}
+  	#answers {
+    	margin: 10px;
+    	list-style-type: none;
+		padding: 0;
+  	}
+  	.answer {
+    	margin: 10px;
+    	text-align: center;
+    	background-color: #ccc;
+    	border-radius: 5px;
+    	padding: 10px;
+    	cursor: pointer;
+  	}
+	.correct {
+		background-color: green;
+	}
+	.correct2 {
+		background-color: lightgreen;
+	}
+	.wrong {
+		background-color: red;
+	}
+	#board {
+		background-color: #fff;
+		padding: 10px;
+		margin: 10px;
+		border-radius: 5px;
+		text-align: left;
+	}
+	#score {
+		color: green;
+	}
+	#count {
+		color: grey;
+	}
+	#timer {
+		color: red;
+		font-size: 20px;
+	}
 </style>
 </head>
 <body>
 
+	<button id="startQuiz">Start Quiz</button>
 
+	<div id="quiz-box">
+		<h5 id="question"></h5>
+		<ul id="answers">
+		<!-- answers appended from js -->
+		</ul>
+		<!-- <button id="submit">Submit</button> -->
+		<button id="pickOther" type="button">Next Question</button>
+		<div id="board">
+			<p>Your Score: <span id="score">0</span></p>
+			<p>Questions Answered: <span id="count">0</span></p>
+		</div>
+		<div id="timer"></div>
+	</div>
+	
 
 <script>
 /*
@@ -34,6 +106,150 @@ Bonus points for:
 1. Keeping score and/or showing statistics.
 2. Adding a countdown timer for each question.
 */
+
+(function () {
+
+    var 
+		score = 0,
+		count = 0,
+		selection,
+		answerIndex,
+		scored = document.getElementById('score'),
+		answered = document.getElementById('count'),
+		quizBox = document.getElementById('quiz-box'),
+		startBtn = document.getElementById('startQuiz'),
+        answerList = document.getElementById('answers'),
+        nextQuestion = document.getElementById('pickOther'),
+		countDown = document.getElementById('timer');
+
+	startBtn.addEventListener('click', function(e) {
+		newQuiz();
+		// startTimer(5);
+	});
+
+    nextQuestion.addEventListener('click', function(e) {
+        answerList.innerHTML = '';
+        newQuiz();
+		// startTimer(5);
+    });
+
+    function newQuiz() {	
+
+      	var url = 'https://opentdb.com/api.php?amount=1&type=multiple';
+
+      	fetch(url, {
+        	method: 'GET'
+      	})
+        .then(res => res.json())
+        .then(data => {
+
+			quizBox.style.display = "block";
+			startBtn.style.display = "none";
+
+			var 
+				results = data.results[0],
+				question = results.question,
+				correctAnswer = results.correct_answer,
+				incorrectAnswers = results.incorrect_answers, 
+				allAnswers = [];
+				
+			for ( i = 0; i <  incorrectAnswers.length; i++) {
+				allAnswers.push(incorrectAnswers[i]);
+			}
+			allAnswers.push(correctAnswer);
+			allAnswers = shuffle(allAnswers);
+
+			answerIndex = allAnswers.indexOf(correctAnswer);
+
+			document.getElementById('question').textContent = question;
+			
+			for (i = 0; i < allAnswers.length; i++) {
+				var li = document.createElement('li');
+				li.classList.add('answer');
+				li.textContent = allAnswers[i];
+				answerList.appendChild(li);
+			}
+			answerList.addEventListener('click', onSelect);
+			
+			function onSelect(e) {
+				
+				var answers = document.getElementsByClassName("answer");
+				var thisAnswer = e.target;
+				// this doesn't work...
+				// for (var i = 0; i < answers.length; i++) {
+				// 	if (thisAnswer !== answers[i]) return;
+				// }
+
+				thisAnswer.classList.add("selected");
+				selection = thisAnswer.textContent;
+
+				if (selection === correctAnswer) {
+					thisAnswer.classList.add('correct');
+					score++;
+					count++;
+					scored.textContent = score;
+					answered.textContent = count;
+					answerList.removeEventListener('click', onSelect);
+				} else {
+					thisAnswer.classList.add('wrong');
+					answers[answerIndex].classList.add('correct2');
+					count++;
+					answered.textContent = count;
+					answerList.removeEventListener('click', onSelect);
+				}
+
+			}
+		
+			// console.log(results);
+			// console.log(allAnswers);
+			// console.log(correctAnswer);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+	// buggy
+	// function startTimer(duration) {
+	// 	var
+	// 		seconds,
+	// 		timer = duration,
+	// 		interval = setInterval(function () {
+	// 			seconds = parseInt(timer % 60, 10);
+
+	// 			countDown.textContent = seconds;
+
+	// 			if (--timer < 0) {
+	// 				timer = duration;
+	// 				answerList.innerHTML = '';
+	// 				// clearInterval(interval);
+	// 				newQuiz();
+	// 			}
+	// 		}, 1000);
+	// }
+	
+	function shuffle(array) {
+		var 
+			currentIndex = array.length, 
+			temporaryValue, 
+			randomIndex;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+			// Pick a remaining element...
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+
+			// And swap it with the current element.
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+
+		return array;
+    }
+
+
+ })()
 </script>
 </body>
 </html>
