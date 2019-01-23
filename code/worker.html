@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>web worker</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+h1 {
+  font-weight: normal;
+}
+input, output {
+  display: block;
+  font-family: sans-serif;
+  font-size: 2em;
+  width: 20em;
+  text-align: right;
+}
+</style>
+</head>
+<body>
+
+<h1>Fibonacci calculator</h1>
+<input id="number" type="number" min="0" value="0" />
+<output id="result" />
+
+<script>
+(function() {
+
+  // worker supported?
+  if (!window.Worker) return;
+
+  const
+    myWorker = new Worker('fibonacci.js'),
+    number = document.getElementById('number'),
+    result = document.getElementById('result');
+
+  // events
+  // note we need multiple ones!
+  number.addEventListener('change', calculate);
+  number.addEventListener('keyup', calculate);
+  number.addEventListener('click', calculate);
+  calculate();
+
+  // process event
+  function calculate(e) {
+    if (e) e.stopPropagation(); // doesn't do much
+    myWorker.postMessage(number.value);
+  }
+
+  // worker sent message
+  myWorker.onmessage = e => {
+    result.value = e.data;
+  };
+
+
+})()
+</script>
+</body>
+</html>
