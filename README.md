@@ -2,6 +2,6 @@
 
 Next lessons:
 
-* cookies
-* local storage
-* web workers
+* PWAs
+* regular expressions
+* bitwise operators
