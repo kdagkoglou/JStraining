@@ -9,11 +9,38 @@ body {
   font-family: sans-serif;
   font-size: 100%;
 }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
 </style>
 </head>
 <body>
 
-
+  <form action="">
+    <div>
+      <input type="text" id="nickname" class="field" name="nickname" placeholder="nickname">
+      <input type="button" id="setCookie1" value="set Cookie">
+      <input type="button" id="getCookie1" value="get Cookie">
+      <input type="button" id="deleteCookie1" value="delete Cookie">
+    </div>
+    <div>
+      <input type="text" id="password" class="field" name="password" placeholder="password">
+      <input type="button" id="setCookie2" value="set Cookie">
+      <input type="button" id="getCookie2" value="get Cookie">
+      <input type="button" id="deleteCookie2" value="delete Cookie">
+    </div>
+  </form>
+  <br>
+  <ul>
+    <li><button id="getAllCookies">get all cookies</button></li>
+    <li><button id="clearAllCookies">clear cookies</button></li>
+  </ul>
 
 <script>
 /*
@@ -37,6 +64,109 @@ Bonus points and considerations:
 * set the final cookie values on page unload.
 
 */
+  var Jar = {
+    set: function (name, value, days) {
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = ";expires=" + date.toGMTString();
+      }
+      else var expires = "";
+      document.cookie = name + "=" + value + expires + ";path=/";
+    },
+    get: function(name) {
+      var cname = name + "=";
+      var dc = document.cookie.split(';');
+      for (var i = 0; i < dc.length; i++) {
+        var c = dc[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1, c.length);
+        }
+        if (c.indexOf(cname) == 0) {
+          return c.substring(cname.length, c.length);
+        }
+      }
+      return "";
+    },
+    delete: function (name) {
+      Jar.set(name, "", -1);
+    }
+  };
+
+  function setCookie(id) {
+    var cname = document.getElementById(id).name; 
+    var cvalue = document.getElementById(id).value;
+    if (cvalue) {
+      alert('cookie is set!');
+      Jar.set(cname, cvalue, 7);
+    } else {
+      alert('please enter a value');
+    }
+  }
+
+  function getCookie(id) {
+    var cname = document.getElementById(id).name;
+    var cval = Jar.get(cname);
+    if (cval) {
+      alert('I got cookie: ' + cval);
+    } else {
+      alert('please enter a value');
+    }
+  }
+
+  function deleteCookie(id) {
+    var cname = document.getElementById(id).name;
+    Jar.delete(cname);
+    alert('cookie deleted');
+  }
+
+  function getAllCookies() {
+    alert('all cookies: ' + document.cookie);
+  }
+
+  function clearAllCookies() {
+    var all = document.cookie.split(";");
+    for (var i = 0; i < all.length; i++) {
+      var key = all[i].split("=");
+      document.cookie = key[0] + " =; expires = Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      alert('cookies cleared');
+    }
+  }
+
+  document.getElementById('setCookie1').addEventListener('click', function() {
+    setCookie('nickname');
+  });
+
+  document.getElementById('getCookie1').addEventListener('click', function() {
+    getCookie('nickname');
+  })
+
+  document.getElementById('deleteCookie1').addEventListener('click', function() {
+    deleteCookie('nickname');
+    document.getElementById('nickname').value = '';
+  });
+
+  document.getElementById('setCookie2').addEventListener('click', function() {
+    setCookie('password');
+  });
+
+  document.getElementById('getCookie2').addEventListener('click', function() {
+    getCookie('password');
+  })
+
+  document.getElementById('deleteCookie2').addEventListener('click', function() {
+    deleteCookie('password');
+    document.getElementById('password').value = '';
+  });
+
+  document.getElementById('getAllCookies').addEventListener('click', function() {
+    getAllCookies();
+  });
+
+  document.getElementById('clearAllCookies').addEventListener('click', function() {
+    clearAllCookies();
+    document.getElementsByClassName('field').value = '';
+  });
 </script>
 </body>
 </html>
