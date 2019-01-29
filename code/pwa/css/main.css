@@ -1,0 +1,45 @@
+/* basic styles */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 100%;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #333;
+  background-color: #fff;
+  margin: 0;
+}
+
+article,aside,details,figcaption,figure,footer,header,main,nav,section,summary {
+  display: block;
+}
+
+nav {
+  font-size: 0.85em;
+  padding: 0.5em 1em;
+  background-color: #ddd;
+}
+
+nav ol, nav li {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  max-width: 40em;
+  margin: 1em auto;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 300;
+  margin: 0;
+}
+
+p {
+  margin: 1em 0 0 0;
+}

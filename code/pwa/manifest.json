@@ -1,0 +1,12 @@
+{
+	"lang"							: "en-GB",
+	"dir"								: "ltr",
+	"name"							: "Test",
+	"short_name"				: "Test site",
+	"description"				: "small test site",
+	"start_url"					: "index.html",
+	"display"						: "minimal-ui",
+	"theme_color"				: "#333",
+	"background_color"	: "#fff",
+  "icons": []
+}
