@@ -2,7 +2,11 @@
 
 Next lessons:
 
-* regular expressions
+* PWAs
 * bitwise operators
 * testing
+
+to do:
+
+* regular expressions
 * SQL
