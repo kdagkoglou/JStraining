@@ -50,7 +50,7 @@ let b = '1111011';
 console.log( b.toString(2) ); // 123
 ```
 
-You can also [encode and decode base-64 data](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding) using `btoa()` and `atob()` respectively:
+You can also [encode and decode base-64 data](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding) in browser client-side code using `btoa()` and `atob()` respectively:
 
 ```js
 let h = btoa('Hello');  // SGVsbG8=
@@ -61,7 +61,7 @@ This is often used to manage images or obfuscate code or strings.
 
 ## Bitwise operators
 
-The primary JavaScript [bitwise operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) treat numbers as 32 bits:
+Binary numbers in JavaScript use 32-bits, however, if the left-most bit is one, the number is presumed to be negative. This means numbers range from -2,147,483,648 to +2,147,483,648. The primary JavaScript [bitwise operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators):
 
 |operator|syntax|description|
 |-|-|-|
@@ -70,10 +70,10 @@ The primary JavaScript [bitwise operators](https://developer.mozilla.org/en-US/d
 |XOR|`a ^ b`|`1` returned where either corresponding bit - but not both - is `1`|
 |NOT|`~ a`|inverts all bits|
 |left shift|`a << b`|shifts `a` bits by `b` places to the left, e.g. `0b10 << 1 === 0b100`|
-|right shift|`a >> b`|shifts `a` bits by `b` places to the right and preserves the +/- sign, e.g. `-10 >> 1 === -5`|
-|right shift|`a >>> b`|shifts `a` bits by `b` places to the right but discards the +/- sign, e.g. `0b10 >>> 1 === 2147483643`|
+|right shift|`a >> b`|shifts `a` bits by `b` places to the right and preserves the +/- sign, e.g. `-7 >> 1 === -4`|
+|right shift|`a >>> b`|shifts `a` bits by `b` places to the right but discards the +/- sign, e.g. `-7 >>> 1 === 2147483644`|
 
-A left shift by one multiplies a number by two. Similarly, a right shift divides by two (rounded down to the nearest integer).
+A left shift by one multiplies a number by two. Similarly, a right shift divides by two (rounded to the nearest integer).
 
 These operators are not used often but may be handy for image processing, encryption, and masking.
 
@@ -85,7 +85,9 @@ let data = 98765;
 
 let encrypted = data ^ key; // 111092
 
-// 111092 is transmitted somewhere then decoded:
+// 111092 is transmitted somewhere
+
+// it can then decoded by anyone who has the key:
 console.log(encrypted ^ key) // 98765
 ```
 

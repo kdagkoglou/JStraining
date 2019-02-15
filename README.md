@@ -2,11 +2,6 @@
 
 Next lessons:
 
-* PWAs
-* bitwise operators
-* testing
-
-to do:
-
 * regular expressions
 * SQL
+* tools: linting (eslint), Gulp.js, webpack, parcel
