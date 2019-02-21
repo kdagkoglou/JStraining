@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Regular expressions</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+<h1>Regular expressions</h1>
+
+<p>Please open the DevTools console...</p>
+
+<script>
+
+/*
+Exercise 1:
+check the following values are valid 16-digit credit card numbers and remove any whitespace
+*/
+
+let ccNumbers = [
+  '1234123412341234',
+  '1234 1234 1234 1234',
+  ' 1234  1234   1234    1234   ',
+  '123412341234123',
+  '123412341234l234',
+  '12341234123412340',
+];
+
+ccNumbers.forEach(cc => {
+
+  // make a copy
+  let c = cc;
+
+  // remove whitespace
+  // c = ...
+
+  // validate
+  let valid = true; // check here!
+
+  // output result
+  console.log( 'input', cc, valid ? 'valid: ' + c : 'not valid' );
+
+});
+
+
+/*
+Exercise 2:
+remove all HTML tags from the string, normalise line endings, remove unnecessary white space and make a well-formed text document. Bonus points for creating basic markdown syntax!
+*/
+
+let html = `
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Regular expressions</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+}
+</style>
+</head>
+<body>
+
+<h1>Regular expressions</h1>
+<p>Are great</p><p>aren't they!</p>
+
+<ul>
+<li>bullet 1</li><li>bullet 2</li><li>bullet 3</li>
+<ul>
+
+<script>
+alert('Hello!');
+<\/script>
+</body>
+</html>
+
+`;
+
+console.log( html );
+
+</script>
+
+</body>
+</html>
