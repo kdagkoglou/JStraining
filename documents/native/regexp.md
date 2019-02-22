@@ -80,6 +80,7 @@ Regular expressions are rarely this simple! Most will use [special characters](h
 |`?`|matches the preceding expression 0 or 1 times, `/a?b/` matches `b`, `ab`|
 |`*`|matches the preceding expression 0 or more times, `/a*b/` matches `b`, `aaab`|
 |`+`|matches the preceding expression 1 or more times, `/a+b/` matches `ab`, `aaab`|
+|`+?` and `*?`|makes the expression non-greedy, `/a.+?c/` matches `abc` and `abbc` in `abc123abbc` rather than the whole string|
 |`{n}`|matches the preceding expression between n times, `/a{2}b/` matches `aab` but nothing else|
 |`{min,max}`|matches the preceding expression between max and min times, `/a{1,2}b/` matches `ab` and `aab` but nothing else|
 |`(x)`|matches the expression and remembers the match for $1, $2, etc. variables, e.g. `'AB'.replace(/(.)(.)/,'$2$1')` returns `BA`|
