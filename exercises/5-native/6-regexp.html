@@ -30,8 +30,10 @@ let ccNumbers = [
   ' 1234  1234   1234    1234   ',
   '123412341234123',
   '123412341234l234',
-  '12341234123412340',
+  '12341234123412340'
 ];
+
+let ccPattern = /^\d{16}$/;
 
 ccNumbers.forEach(cc => {
 
@@ -39,13 +41,15 @@ ccNumbers.forEach(cc => {
   let c = cc;
 
   // remove whitespace
-  // c = ...
+  c = c.replace(/\s+/g, '');
 
   // validate
   let valid = true; // check here!
+  if(ccPattern.test(c)) valid = true;
+  else valid = false;    
 
   // output result
-  console.log( 'input', cc, valid ? 'valid: ' + c : 'not valid' );
+  // console.log( 'input', cc, valid ? 'valid: ' + c : 'not valid' );
 
 });
 
@@ -86,6 +90,25 @@ alert('Hello!');
 </html>
 
 `;
+
+let
+  // remove Tags
+  rmTags = /<[^>]+>/g,
+  // remove everything between head tag
+  rmHead = /<head((.|\n|\r)*?)<\/head>/g,
+  // reomve everything between script tags
+  rmScripts = /<script((.|\n|\r)*?)<\/script>/g,
+  // new lines
+  normLineEnd = /\s*\n\s*/g,
+  // ul bullet list styling
+  liStyling = /<li>(.*?)<\/li>/g;
+
+html = html.replace(liStyling, '* $1 \n');
+html = html.replace(rmHead, '');
+html = html.replace(rmScripts, '');
+html = html.replace(rmTags, ' ');
+html = html.replace(normLineEnd, '\n');
+
 
 console.log( html );
 
