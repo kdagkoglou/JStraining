@@ -1,18 +1,17 @@
 # JavaScript training
 
-* linting (eslint)
-
-Next lessons:
-
-* SQL
-* tools: Gulp.js, webpack, parcel
-
-Assure training:
+Recently done:
 
 * application design
 * database design (why MongoDB)
+
+Next lessons:
+
 * approach: lightweight, minimal business logic, data first, API first, mobile first, progressive enhancement
 * overall runtime process (forever, development and production modes)
+
+Assure training:
+
 * Gulp build process (static, views): development and production
 * browsersync and nodemon
 * root files, images, fonts, Sass/CSS (and themes), JavaScript, HTML views

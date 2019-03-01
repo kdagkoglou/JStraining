@@ -26,7 +26,7 @@ check the following values are valid 16-digit credit card numbers and remove any
 
 let ccNumbers = [
   '1234123412341234',
-  '1234 1234 1234 1234',
+  '1234-1234-1234-1234',
   ' 1234  1234   1234    1234   ',
   '123412341234123',
   '123412341234l234',
@@ -41,15 +41,13 @@ ccNumbers.forEach(cc => {
   let c = cc;
 
   // remove whitespace
-  c = c.replace(/\s+/g, '');
+  c = c.replace(/\s+|-/g, '');
 
   // validate
-  let valid = true; // check here!
-  if(ccPattern.test(c)) valid = true;
-  else valid = false;    
+  let valid = ccPattern.test(c); // check here!
 
   // output result
-  // console.log( 'input', cc, valid ? 'valid: ' + c : 'not valid' );
+  console.log( 'input', cc, valid ? 'valid: ' + c : 'not valid' );
 
 });
 
