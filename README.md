@@ -9,11 +9,11 @@ Next lessons:
 
 * approach: lightweight, minimal business logic, data first, API first, mobile first, progressive enhancement
 * overall runtime process (forever, development and production modes)
+* Gulp build process (static, views): development and production
+* browsersync and nodemon
 
 Assure training:
 
-* Gulp build process (static, views): development and production
-* browsersync and nodemon
 * root files, images, fonts, Sass/CSS (and themes), JavaScript, HTML views
 * Express.js configuration, SSL, clustering
 * routes: HTML templates, API
