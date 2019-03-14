@@ -12,7 +12,7 @@ In general, Gulp is used to:
 
 All source files are contained in `/src`.
 
-Most static assets are built to `/static`. This is declared as a static folder in express.js so file URLs can be referenced directly.
+Most static assets are built to `/static`. This is declared as a static folder in Express.js so file URLs can be referenced directly.
 
 HTML DoT templates are built to `/views`.
 
@@ -84,3 +84,5 @@ or a combination of both:
 ```js
 exports.build = gulp.parallel(gulp.series(images, fonts, css), js, html);
 ```
+
+Assure defines all task configuration at the top of `gulpfile.js`. These are followed by the task functions and export references.
