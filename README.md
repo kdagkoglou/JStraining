@@ -9,17 +9,17 @@ Recently done:
 * Gulp build process (static, views): development and production
 * browsersync and nodemon
 * root files, images, fonts, Sass/CSS (and themes), JavaScript, HTML views
+* issues - how they work!
 
 Next lessons:
 
-* issues - how they work!
 * Express.js configuration, SSL, clustering
+* routes: HTML templates, API
+* user sessions
 
 Assure training:
 
-* routes: HTML templates, API
 * objects: configuration, language, session, company, users, tests, issues, statistics, queue, charts, reports, store
-* client-side HTML templates, CSS and JavaScript
 * database updates
 * task management: email alerts, S3 migration, image hash, user expire, data lookup
 * utilities (backup, renamer, Blast, fixing)
