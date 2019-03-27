@@ -1,6 +1,6 @@
 # Assure user sessions
 
-Assure uses a lightweight, custom, passwordless login system. This has been a considerable success: users often access infrequently and forget their password. Password-related support calls have been reduced from many hours per month to almost nil.
+Assure uses a lightweight, custom, passwordless login system. This has been a considerable success: users often access infrequently and forget their password. Password-related support calls have been reduced from many hours per month to almost nil. *(Definitely consider passwordless logins for other systems!)*
 
 Some pages, such as individual tests and help, can be accessed without logging on. Information and interaction is reduced, but it permits non-clients or those who rarely log in to access and share data with minimal effort.
 
@@ -47,6 +47,13 @@ On submission of an email address, Assure:
 1. presuming the session is valid, a 2-week cookie is set to the `session._id` value.
 
 
+To log out, the user is directed to `/0` which deletes the current session record from the database, resets the cookie, and redirects to `/` to show the login page.
+
 Note that Assure uses a single HTTPS server-only cookie to store the session ID. It would not be possible for a third-party system to analyse the cookie and spoof requests.
 
-To log out, the user is directed to `/0` which deletes the current session record from the database, resets the cookie, and redirects to `/` to show the login page.
+
+### Cross-Origin Resource Sharing (CORS)
+
+Assure's session cookie is shared with all applications on a sub-domain of empello.net. This is implemented using CORS when an initial HTTP OPTIONS request or an Ajax request is sent. The application does not need to implement its own login procedures; any logged in user can trigger an Assure client-side request for data and receive a response which adheres with that user's permission rights.
+
+The appropriate headers are set by the `setCORS()` function called by the `init()` Express.js middleware in `lib/session.js`. *(Note it also sets the HTTP `Vary` header to `X-Requested-With` which ensures Chrome-based browsers do not presume any cached HTML and JSON from the API are valid for all requests to the same URL endpoint.)*
