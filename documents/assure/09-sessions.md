@@ -2,16 +2,16 @@
 
 Assure uses a lightweight, custom, passwordless login system. This has been a considerable success: users often access infrequently and forget their password. Password-related support calls have been reduced from many hours per month to almost nil. *(Definitely consider passwordless logins for other systems!)*
 
-Some pages, such as individual tests and help, can be accessed without logging on. Information and interaction is reduced, but it permits non-clients or those who rarely log in to access and share data with minimal effort.
+Some pages, such as individual tests and help, can be accessed without logging on. Information and interaction is reduced, but it permits non-clients or those who rarely log in to access and share Assure data with minimal effort. This has helped clients become aware of Empello's service and is possibly overlooked as a sales benefit.
 
 To log in:
 
 1. The user is directed to the login page (`/`).
 1. They submit their email address.
-1. Assuming the user is registered, Assure creates a new session in the database, sets a 30-minute cookie, and emails a verification link to the user.
+1. Assuming the user is registered, Assure creates a new session in the database, sets a 30-minute cookie in the browser, and emails a verification link to the user.
 1. When that link is clicked, the data is verified and the cookie is set to a real session ID with a 2-week expiry.
 
-The user is now logged and subsequent requests for the root `/` URL will show the dashboard. The value of the session cookie is parsed on every request to fetch session and user information from the database.
+The user is now logged and subsequent requests for the root `/` URL will show the dashboard. The value of the session cookie is parsed on every request to fetch session and user information from the database. The cookie expiry and session `datelast` datetime is also updated accordingly.
 
 The user can log on via multiple devices at the same time. Each device will have a separate session.
 
@@ -57,3 +57,5 @@ Note that Assure uses a single HTTPS server-only cookie to store the session ID.
 Assure's session cookie is shared with all applications on a sub-domain of empello.net. This is implemented using CORS when an initial HTTP OPTIONS request or an Ajax request is sent. The application does not need to implement its own login procedures; any logged in user can trigger an Assure client-side request for data and receive a response which adheres with that user's permission rights.
 
 The appropriate headers are set by the `setCORS()` function called by the `init()` Express.js middleware in `lib/session.js`. *(Note it also sets the HTTP `Vary` header to `X-Requested-With` which ensures Chrome-based browsers do not presume any cached HTML and JSON from the API are valid for all requests to the same URL endpoint.)*
+
+Note that the cookie for TEST (and an older AN system) use a different cookie name because these are on sub-domains of empello.net but must be treated as separate systems, i.e. being logged in at test.empello.net does not log you in at empello.net.

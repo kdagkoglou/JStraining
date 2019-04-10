@@ -10,16 +10,17 @@ Recently done:
 * browsersync and nodemon
 * root files, images, fonts, Sass/CSS (and themes), JavaScript, HTML views
 * issues - how they work!
+* Express.js configuration, SSL, clustering
+* routes: HTML templates, API
 
 Next lessons:
 
-* Express.js configuration, SSL, clustering
-* routes: HTML templates, API
 * user sessions
+* objects: configuration, language, company, users, tests, issues, statistics, queue, charts, store
 
 Assure training:
 
-* objects: configuration, language, session, company, users, tests, issues, statistics, queue, charts, reports, store
+* reports
 * database updates
 * task management: email alerts, S3 migration, image hash, user expire, data lookup
 * utilities (backup, renamer, Blast, fixing)
