@@ -19,6 +19,8 @@ General client-side process used by Assure:
 1. HTML is returned which loads the single CSS and JavaScript files.
 1. JavaScript components initialise themselves according to the HTML content. For example, the test list and user list use the same `table.js` component to control data pagination when an appropriate table is present in the page.
 
+In some cases, such as the test and user lists, the 'page' becomes a small SPA where the routing URL is modified by the client-side code.
+
 
 ## package.json configuration
 
@@ -59,7 +61,7 @@ lang = {
 
 The appropriate strings are normally referenced by running `lib/utils.js/token(TYPE, language)` in `lib/` objects, e.g. `= util.token('TEST', 'en')`.
 
-Support for other languages - such as *fr** - could therefore be added by:
+Support for other languages - such as *fr* - could therefore be added by:
 
 1. Adding (uncommenting) the `fr` language to `shared.language.values` in `lib/lang.js`.
 1. Copying the `uk` strings in `lib/lang.js` to new `fr` sections and translating accordingly.
@@ -93,6 +95,16 @@ One of the most complex objects used to manage a single test:
 * delete a test and manage attached issues, companies and assets accordingly
 * reset statistics
 * find matching brands (for auto-complete)
+
+
+## `lib/countrynetwork.js`
+
+Used to associate mobile networks with countries for improved selection:
+
+* initialises and either generates new associations from the database and stores (see `store.js`) or fetches previous associations from the store
+* generates data for client-side components
+* modifies country/network statistics
+* broadcasts and updates store data when changes occur
 
 
 ## `lib/issue.js`
