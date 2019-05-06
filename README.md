@@ -12,16 +12,16 @@ Recently done:
 * issues - how they work!
 * Express.js configuration, SSL, clustering
 * routes: HTML templates, API
-
-Next lessons:
-
 * user sessions
 * objects: configuration, language, company, users, tests, issues, statistics, queue, charts, store
 
-Assure training:
+Next lessons:
 
 * reports
 * database updates
+
+Assure training:
+
 * task management: email alerts, S3 migration, image hash, user expire, data lookup
 * utilities (backup, renamer, Blast, fixing)
 * maintenance: module updates, DB updates, monitoring, changelog
