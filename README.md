@@ -14,10 +14,10 @@ Recently done:
 * routes: HTML templates, API
 * user sessions
 * objects: configuration, language, company, users, tests, issues, statistics, queue, charts, store
+* reports
 
 Next lessons:
 
-* reports
 * database updates
 
 Assure training:
