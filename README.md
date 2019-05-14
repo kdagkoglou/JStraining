@@ -18,10 +18,11 @@ Recently done:
 
 Next lessons:
 
-* database updates
+* database/application updates
+* task management: email alerts, S3 migration, image hash, user expire, data lookup
+* database backup
 
 Assure training:
 
-* task management: email alerts, S3 migration, image hash, user expire, data lookup
 * utilities (backup, renamer, Blast, fixing)
 * maintenance: module updates, DB updates, monitoring, changelog
