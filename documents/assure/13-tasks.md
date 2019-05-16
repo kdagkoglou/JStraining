@@ -58,7 +58,7 @@ It is run every 10 minutes except between 1:00 and 4:00 when database backups ar
 
 This process sends a summary email to users when they are due (1 to 6 weeks depending on the user's configuration):
 
-1. Active clients with an overdue `nextsummary` datetime.
+1. Fetch active clients with an overdue `nextsummary` datetime.
 1. Fetch the number of tests in the period (`n` weeks) which have been raised for each user's company at the required status.
 1. Update the user's `nextsummary` as appropriate.
 1. Construct templates and send emails to the queue.

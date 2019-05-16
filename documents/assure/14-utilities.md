@@ -83,7 +83,7 @@ This application should not be necessary. It was only used to discover problems 
 
 Completely wipes tests, issues, and assets from the chosen database. Users are retained but have their history wiped. Companies are only retained when they have one or more users.
 
-Never use this - the application runs immediately without warning!
+Never use this - *the application runs immediately without warning!*
 
 
 ## Blast

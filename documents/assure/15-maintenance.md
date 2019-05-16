@@ -1,6 +1,6 @@
 # Assure maintenance
 
-Assure normally runs well for many weeks at a time but there are background maintenance tasks which keep things running smoothly.
+Assure normally runs well for many weeks at a time but there are background maintenance jobs to keep things running smoothly.
 
 
 ## Process monitoring
@@ -20,19 +20,21 @@ The `top` command also reveals `%CPU` and `%MEM` usage:
 * `mongod` (MongoDB) is always the busiest process and typically uses half the CPU and memory or more during busy times
 * the 16 `node` processes (Assure) rarely exceed 1% each.
 
-`node` memory overflows eventually cause Assure to run slowly, crash, and restart. They are rare and often caused by bad callbacks, i.e. `process.nextTick` has not been used when an immediate error occurs.
+`node` memory overflows eventually cause Assure to run slowly, crash, and restart. They are rare and often caused by bad callbacks, i.e. `process.nextTick` has not been used when an immediate error callback is necessary.
 
 
 ### Clear MongoDB log
 
-MongoDB creates a huge log file at `/var/log/mongodb/mongod.log` which would eventually cause the OS to run out of disk space. To reset it, run the following commands from the `mongo` prompt:
+MongoDB creates a huge log file at `/var/log/mongodb/mongod.log` which would eventually cause the OS to run out of disk space. (I have attempted less verbose configuration settings but it rarely makes a difference!)
+
+To reset it, run the following commands from the `mongo` prompt:
 
 ```txt
 use admin;
 db.runCommand({logRotate:1});
 ```
 
-The old file is copied to a new one which normally contains the date - this can be deleted with `sudo rm <file>`.
+The old `.log` file is copied to a new one which normally contains the date - this can be deleted with `sudo rm <file>`.
 
 `.gz` files in the `/var/log/` folder can also be safely deleted.
 
@@ -62,9 +64,9 @@ Relatively few third-party modules are used and most are Gulp.js plugins used at
 
 Express.js and middleware modules update infrequently and rarely cause compatibility problems.
 
-`mongodb` is updated every few months and new major versions can change the API. Warnings are usually output to the log, but significant changes can be necessary. These should not be ignored, since they are often introduced by updates to MongoDB itself.
-
 `multer` and `jimp` have changed APIs a few times but code changes are usually minimal.
+
+`mongodb` is updated every few months and new major versions can change the API. Warnings are usually output to the log, but significant changes may be necessary. **These should not be ignored!...** they are often introduced by updates to MongoDB itself.
 
 `aws-sdk` updates occur almost daily but the API remains consistent.
 

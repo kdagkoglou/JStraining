@@ -42,7 +42,7 @@ When an update is successfully completed, the current version number is stored i
 
 Update files are contained in the `update` folder. Each filename is the version number with a `.js` extension, e.g. `1.54.0.js`, `1.55.7.js` etc. Not all releases require an update file, but all updates for a version are contained in one file.
 
-Each exports a single function with a single callback parameter which is run on completion. It is passed an error and the version number (extracted from the filename).
+Each exports a single function with a single callback parameter which is run on completion. The callback returns an error and the version number (extracted from the filename).
 
 The majority of updates run through an array of functions handled by the `Process` object defined in `/lib/util-update.js`. If any function returns an error, further processing is cancelled.
 
@@ -61,10 +61,12 @@ The file and function being processed is output to the console.
 
 The process can therefore be run multiple times until all updates are successfully applied.
 
+A new installation would run all updates in order until the final one was reached.
+
 
 ### Version number calculation
 
-The version is converted from a string to an integer by splitting into parts and multiplying by a weighting:
+The version is converted from a string to an integer by splitting into parts and multiplying by a weight:
 
 ```js
 (major * 100000) + (minor * 1000) + patch;
