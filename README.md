@@ -21,8 +21,5 @@ Next lessons:
 * database/application updates
 * task management: email alerts, S3 migration, image hash, user expire, data lookup
 * database backup
-
-Assure training:
-
-* utilities (backup, renamer, Blast, fixing)
+* utilities (renamer, Blast, fixes)
 * maintenance: module updates, DB updates, monitoring, changelog
