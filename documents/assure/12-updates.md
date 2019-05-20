@@ -111,4 +111,4 @@ Examples in the `/update` folder where this is used:
 * `1.28.0.js` - issue tracking and message conversion
 * `1.45.6.js` - identifying the merchant in a company list for search/indexing
 * `1.47.0.js` - identify banner, prelanding, and landing images in existing tests
-* `1.54.7.js` - breach type updates requested by analysts
+* `1.55.7.js` - breach type updates requested by analysts
