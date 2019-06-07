@@ -15,11 +15,11 @@ Recently done:
 * user sessions
 * objects: configuration, language, company, users, tests, issues, statistics, queue, charts, store
 * reports
-
-Next lessons:
-
 * database/application updates
 * task management: email alerts, S3 migration, image hash, user expire, data lookup
 * database backup
+
+Next lessons:
+
 * utilities (renamer, Blast, fixes)
 * maintenance: module updates, DB updates, monitoring, changelog
